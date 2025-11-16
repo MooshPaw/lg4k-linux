@@ -117,7 +117,7 @@ void *sys_get_drvdata(device_handle_t device_handle)
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4,15,0)
 static void i2c_timeout(struct timer_list *t)
 {
-    sys_wait_sem_t *wait_sem_cxt = from_timer(wait_sem_cxt, t, timer);
+    sys_wait_sem_t *wait_sem_cxt = container_of(t, sys_wait_sem_t, timer);
     //wake_up(&wait_sem_cxt->wait_queue);
     up(&wait_sem_cxt->sem);
     //aver_xilinx_cxt->com0status = 1;
